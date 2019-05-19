@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="MissingConstraints">
+ <android.support.design.widget.AppBarLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:theme="@style/AppTheme">
+
+
+
+ <android.support.v7.widget.Toolbar
+     android:id="@+id/my_toolbar"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:background="@color/colorPrimary"
+     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+     />
+
+ </android.support.design.widget.AppBarLayout>
+
+
+ <Button
+     android:id="@+id/button1"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="16dp"
+
+     android:backgroundTint="#FFCDD2"
+     android:text="112 신고"
+     android:fontFamily="@font/namsan"
+     app:layout_constraintBottom_toBottomOf="@+id/button2"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="@+id/button2" />
+
+ <Button
+     android:id="@+id/button2"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginEnd="16dp"
+
+     android:layout_marginBottom="110dp"
+     android:backgroundTint="#FFCDD2"
+     android:text="Drone"
+     android:fontFamily="@font/namsan"
+     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+</android.support.constraint.ConstraintLayout>
