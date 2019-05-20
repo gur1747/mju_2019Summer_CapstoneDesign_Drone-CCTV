@@ -1,0 +1,22 @@
+#! /usr/bin/python
+
+import serial
+from time import sleep
+
+bluetoothSerial = serial.Serial("/dev/rfcomm0", baudrate=9600)
+
+while not done:
+	
+	data = bluetoothSerial.readline()
+
+	if(data>=28):
+		print "위험물체 감지: "
+		temp=data;
+	if(data>=400):
+		print "위험가스 감지: "
+		gas=data;
+
+	print data
+
+serial.close();p
+print "Bye!"
