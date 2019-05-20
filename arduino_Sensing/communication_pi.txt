@@ -7,13 +7,13 @@ bluetoothSerial = serial.Serial("/dev/rfcomm0", baudrate=9600)
 
 while not done:
 	
-	data = bluetoothSerial.readline()
+	data = float(bluetoothSerial.readline())
 
 	if(data>=28):
-		print "위험물체 감지: "
+		print "danger_object: "
 		temp=data;
 	if(data>=400):
-		print "위험가스 감지: "
+		print "danger_gas: "
 		gas=data;
 
 	print data
