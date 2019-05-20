@@ -9,11 +9,12 @@ const int GasPin = A0;          // Analog pin for gas sensor input
 void setup() {
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
+  Serial.setTimeout(200);
 
-  Serial.println("Goodnight moon!");
+  Serial.println("Hello?");
   // set the data rate for the SoftwareSerial port
   mySerial.begin(9600);
-  mySerial.println("Hello, world?");
+  mySerial.println("Hello?");
 
   //Serial.println("Adafruit MLX90614 test");  
   mlx.begin(); 
@@ -25,37 +26,36 @@ void setup() {
 void loop() {
   
   // Receive analog data from gas sensor and output to serial monitor
-  analogRead(GasPin);
+  //analogRead(GasPin);
   if(analogRead(GasPin) > 500){
-    //Serial.print(analogRead(GasPin));
+    int gas = analogRead(GasPin);
+    mySerial.println(gas);
+    
     Serial.println("*********Dangerous gas detected.*********");
+    Serial.println(gas);
     Serial.println();
   }
 
   // Set the sensing temperature to 28 degrees.
   if(mlx.readObjectTempC() >= 28){
     float tempC = mlx.readObjectTempC();
-    //Serial.println("*****************Danger*****************");
-    //Serial.print("Ambient = "); Serial.print(mlx.readAmbientTempC());
-    //Serial.print("*C\tObject = "); 
-    Serial.println(tempC); 
-    //Serial.println("*C");
-    //Serial.print("Ambient = "); Serial.print(mlx.readAmbientTempF());
-    //Serial.print("*F\tObject = "); Serial.print(mlx.readObjectTempF()); Serial.println("*F");
-    //Serial.println();
+    mySerial.println(tempC);
+    
+    Serial.println("*****************Danger*****************");
+    Serial.print("Ambient = "); Serial.print(mlx.readAmbientTempC());
+    Serial.print("*C\tObject = "); Serial.println(tempC); Serial.println("*C");
+    Serial.print("Ambient = "); Serial.print(mlx.readAmbientTempF());
+    Serial.print("*F\tObject = "); Serial.print(mlx.readObjectTempF()); Serial.println("*F");
+    Serial.println();
   }
-   
+
   if (mySerial.available()) {
     Serial.write(mySerial.read());
-    float toSend = (float)mySerial.read();
-    Serial.print(toSend);
   }
   if (Serial.available()) {
     mySerial.write(Serial.read());
-    float toSend = (float)Serial.read();
-    mySerial.print(toSend);
   }
-  
-  delay(200);
+
+  //delay(500);
 
 }
