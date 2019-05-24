@@ -9,14 +9,14 @@ while not done:
 	
 	data = float(bluetoothSerial.readline())
 
-	if(data>=28):
+	if(100>data>=28):
 		print "danger_object: "
 		temp=data;
-	if(data>=400):
+	if(data>=500):
 		print "danger_gas: "
 		gas=data;
 
 	print data
 
-serial.close();p
+serial.close();
 print "Bye!"
