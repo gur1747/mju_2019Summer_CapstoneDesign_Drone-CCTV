@@ -45,5 +45,6 @@ void loop() {
   delay(1000);
 }
 
+
   //Serial.print("Ambient = "); Serial.print(mlx.readAmbientTempF()); 
-  //Serial.print("*F\tObject = "); Serial.print(mlx.readObjectTempF()); Serial.println("*F");
+  //Serial.print("*F\tObject = "); Serial.przoqint(mlx.readObjectTempF()); Serial.println("*F");

@@ -11,19 +11,23 @@ while not done:
 
 	if(data == 0):
 		print "location1: danger_object"
-        location = 1;
+        location = 1
+
 	if(data == 1):
 		print "location1: danger_gas"
-        lacation = 1;
+        location = 1
+
 	if(data == 2):
 		print "location2: danger_gas"
-        location = 2;
+        location = 2
+
 	if(data == 3):
 		print "location3: danger_gas"
-        location = 3;
+        location = 3
+		
 	if(data == 4):
 		print "location4: danger_gas"
-        location = 4;
+        location = 4
 
 serial.close();
 print "Bye!"
