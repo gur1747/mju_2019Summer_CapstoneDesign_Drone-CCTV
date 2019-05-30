@@ -24,7 +24,6 @@ hm10_t hm10;//9
 motor_t motor = { .a = 0, .b = 2, .c = 1, .d = 3, };//10
 pca9685_t pca9685 = { .i2c_addr = 0x40, };//10
 
-void initTargetAngle();
 int kbhit(void);
 
 int main() {
@@ -36,7 +35,6 @@ int main() {
         init(dt);//5 //시간 주기 구하기
         init(hm10);//9 //블루투스 모듈 쪽 초기화
         init(i2c, pca9685);//10  //모터 초기화
-        //타겟앵글 초기화 -> 초기 오차값 보정해야 함. 공식은 책 참조
 
         //throttle.value = 140;
         char c;
@@ -121,5 +119,3 @@ int kbhit(void){    //키보드 입력감지 함수 -> 감지 된 문자를 저�
   }
   return 0;
 }
-
-void initTargetAngle()
