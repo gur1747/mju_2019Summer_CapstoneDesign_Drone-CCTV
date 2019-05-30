@@ -36,7 +36,7 @@ int main() {
         init(hm10);//9 //블루투스 모듈 쪽 초기화
         init(i2c, pca9685);//10  //모터 초기화
         delay(3000);
-       
+
         setThrottle(150);
         setPitch(-2);
         int i;
@@ -51,7 +51,7 @@ int main() {
 }
 
 void setStay(){
-        
+
         read(mpu6050, gyro_raw);//1 //원시 자이로 값 읽기
         calc(gyro_adj, gyro_raw, gyro_offset);//3 //원시 자이로 편차 평균 구하기
         calc(gyro_rate, gyro_adj);//4 //pitch roll yaw 기준 측정
