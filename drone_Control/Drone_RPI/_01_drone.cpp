@@ -21,14 +21,9 @@ motor_t motor = { .a = 0, .b = 2, .c = 1, .d = 3, };//10
 pca9685_t pca9685 = { .i2c_addr = 0x40, };//10
 
 #include <stdio.h>
-
 #include <termios.h>
-
 #include <unistd.h>
-
 #include <fcntl.h>
-
-
 
 int kbhit(void){
 
@@ -69,7 +64,7 @@ int main() {
         init(hm10);//9 //블루투스 모듈 쪽 초기화
         init(i2c, pca9685);//10  //모터 초기화
         //이 부분에 딜레이가 필요할 듯 보임 -> 위에 get함수가 합을 구할때 까지 시간이 필요함.
-        throttle.value = 130;
+        throttle.value = 140;
         while( true ) {
                 if  ( kbhit() ){
                         throttle.value = 0;
