@@ -66,6 +66,7 @@ int main() {
 
         throttle.value = 140;
         char c;
+        bool exit = false;
         while( true ) {
                 if  ( kbhit() ){
                   c = getchar();
@@ -87,7 +88,7 @@ int main() {
                     target_angle.roll += 1;
                   }else if ( c == ' ' ){
                     throttle.value = 0;
-                    return 0;
+                    exit = true;
                   }
                 }
                 read(mpu6050, gyro_raw);//1 //원시 자이로 값 읽기
@@ -102,6 +103,9 @@ int main() {
                 //check(hm10, throttle, target_angle);//9         //명령 수신 확인
                 update(pca9685, motor, motor_speed);//10  //도출 된 모터 속도 적용
 
+                if ( exit ){
+                  return 0;
+                }
                 static int cnt_loop;//1
                 cnt_loop++;//1
                 if( cnt_loop%300 != 0) continue;//1
@@ -115,5 +119,6 @@ int main() {
                 print(balancing_force);//7
                 print(motor_speed);//8
                 println();//1
+
         }
 }
