@@ -3,7 +3,7 @@
 // 5. 함수 정의
 void print(gyro_raw_t& gyro_raw) {
 	
-	printf("#RAW(X,Y,Z): ");
+	printf("#RAW(X,Y,Z):");
 	printf("%6d,", gyro_raw.x);
 	printf("%6d,", gyro_raw.y);
 	printf("%6d", gyro_raw.z);        
