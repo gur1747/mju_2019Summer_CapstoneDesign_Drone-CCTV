@@ -6,52 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     tools:ignore="MissingConstraints">
- <android.support.design.widget.AppBarLayout
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:theme="@style/AppTheme">
 
+ <VideoView android:layout_width="match_parent"
+     android:layout_height="300dp"
+     app:layout_constraintTop_toTopOf="parent"
+     app:layout_constraintBottom_toTopOf="@id/button1"
+     app:layout_constraintLeft_toLeftOf="parent"
+     app:layout_constraintRight_toRightOf="parent"
 
-
- <android.support.v7.widget.Toolbar
-     android:id="@+id/my_toolbar"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:background="@color/colorPrimary"
-     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-     />
-
- </android.support.design.widget.AppBarLayout>
-
+     android:id="@+id/videoView" />
 
  <Button
      android:id="@+id/button1"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginStart="16dp"
+     android:layout_width="375dp"
+     android:layout_height="53dp"
+     android:layout_marginStart="20dp"
 
      android:backgroundTint="#FFCDD2"
-     android:text="112 신고"
      android:fontFamily="@font/namsan"
+     android:text="112 신고"
      app:layout_constraintBottom_toBottomOf="@+id/button2"
      app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toTopOf="@+id/button2" />
+     app:layout_constraintTop_toTopOf="@+id/button2"
+     />
+
+ <android.support.v4.widget.DrawerLayout
+     android:id="@+id/dl_main_drawer_root"
+     android:layout_width="0dp"
+     android:layout_height="0dp"
+     app:layout_constraintTop_toTopOf="parent"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintLeft_toLeftOf="parent"
+     app:layout_constraintRight_toRightOf="parent"
+     android:fitsSystemWindows="true"
+     tools:openDrawer="start"
+     >
+
+  <!-- main content -->
+  <include
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      layout="@layout/activity_main_content" />
+
+  <!-- navigation drawer-->
+  <android.support.design.widget.NavigationView
+      android:id="@+id/nv_main_navigation_root"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      android:fitsSystemWindows="true"
+      app:headerLayout="@layout/nav_header_main"
+      app:menu="@menu/menu" />
+
+ </android.support.v4.widget.DrawerLayout>
+
 
  <Button
      android:id="@+id/button2"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_marginEnd="16dp"
-
      android:layout_marginBottom="110dp"
+
+
      android:backgroundTint="#FFCDD2"
-     android:text="Drone"
      android:fontFamily="@font/namsan"
+     android:text="Drone"
+     android:visibility="invisible"
      app:layout_behavior="@string/appbar_scrolling_view_behavior"
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent" />
-
 
 
 </android.support.constraint.ConstraintLayout>

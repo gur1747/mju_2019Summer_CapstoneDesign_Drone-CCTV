@@ -1,6 +1,7 @@
 
 <resources>
     <string name="app_name">Catch4U</string>
-
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
 
 </resources>

@@ -30,15 +30,12 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
-
-
     //load
    private void getPreferences(){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String sUrl = pref.getString("stream", "");
         editText.setText(sUrl);
     }
-
     //save
       private void savePreferences(String s){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
