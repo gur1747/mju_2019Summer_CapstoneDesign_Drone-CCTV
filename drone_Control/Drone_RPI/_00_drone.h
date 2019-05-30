@@ -35,6 +35,10 @@ typedef struct { int serial_port; } hm10_t;//9
 // typedef struct { int dummy; } pca9685_t;
 typedef struct { int a, b, c, d; } motor_t;//10
 
+void setThrt(int throttle);
+void setPitch(int pitch);
+void setRoll(int roll);
+void setYaw(int yaw);
 void init(i2c_t&);//1
 void init(i2c_t&, mpu6050_t&);//1
 void read(mpu6050_t&, gyro_raw_t&);//1
