@@ -12,8 +12,8 @@ void error_handling(char * msg);
 int main(){
   int sock;
   char msg[BUF_SIZE];
-  char ip_addr[32] = "192.168.0.140";   //ip 확인 후 변경
-  int port_num = 4600;    //port num 확인 후 변경
+  char ip_addr[32] = "192.168.43.151";   //ip 확인 후 변경
+  int port_num = 4300;    //port num 확인 후 변경
 
   int str_len;
   socklen_t adr_sz;
