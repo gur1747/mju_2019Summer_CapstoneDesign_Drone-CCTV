@@ -24,12 +24,12 @@ int main(){
     exit(1);
   }
   */
-  sock = socket(PF_INET, SOCK_DGRAM, 0);
+  sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
   if(sock == -1){
     error_handling("socker() error");
   }
   memset(&serv_addr, 0, sizeof(serv_addr));
-  serv_addr.sin_family = PF_LOCAL;
+  serv_addr.sin_family = AF_INET;
   serv_addr.sin_addr.s_addr = inet_addr(ip_addr);
   serv_addr.sin_port = htons(port_num);
 
