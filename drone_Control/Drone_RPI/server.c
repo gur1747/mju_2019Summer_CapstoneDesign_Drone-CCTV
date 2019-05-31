@@ -1,3 +1,4 @@
+//udp server for raspi's - C
 #include <stdio.h> //printf
 #include <string.h> //memset
 #include <stdlib.h> //exit(0);

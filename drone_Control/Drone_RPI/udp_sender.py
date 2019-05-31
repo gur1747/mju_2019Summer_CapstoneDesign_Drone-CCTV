@@ -1,3 +1,5 @@
+#udp sndr - Py
+
 import socket
 
 # connection create
