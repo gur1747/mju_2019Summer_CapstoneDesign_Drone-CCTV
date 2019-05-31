@@ -7,7 +7,7 @@
 
 #define BUF_SIZE 256
 
-void error_handling(char[BUF_SIZE] msg);
+void error_handling(char m[BUF_SIZE]);
 
 int main(){
   int sock;
@@ -43,8 +43,8 @@ int main(){
   return 0;
 }
 
-void error_handling(char[BUF_SIZE] msg){
-  fputs(msg, stderr);
+void error_handling(char m[BUF_SIZE]){
+  fputs(m, stderr);
   fputc('\n', stderr);
   exit(1);
 }
