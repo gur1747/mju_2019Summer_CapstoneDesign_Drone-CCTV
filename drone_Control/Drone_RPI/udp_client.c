@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
   serv_adr.sin_port = htons(atoi(argv[2]));
 
   while(1){
-    fputs("Insert message(quit : q) : " stdout);
+    fputs("Insert message(quit : q) : ", stdout);
     fgets(message, sizeof(message), stdin);
     if(!strcmp(message, "q\n") || !strcmp(message, "Q\n")){}
       break;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
     sendto(sock, message, strlen(message), 0, (struct sockaddr*)&from_adr, &adr_sz);
     adr_sz = sizeof(from_adr);
     str_len = recvfrom(sock, message, BUF_SIZE, 0, (struct sockaddr*)&from_adr, &adr_sz);
-    msg[str_len] = 0;
+    message[str_len] = 0;
     printf("Message from server : %s\n", message);
   }
   close(sock);
