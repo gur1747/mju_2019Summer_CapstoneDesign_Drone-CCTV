@@ -24,7 +24,7 @@ int main(){
     exit(1);
   }
   */
-  sock = socket(PF_LOCAL, SOCK_DGRAM, IPPROTO_UDP);
+  sock = socket(PF_INET, SOCK_DGRAM, 0);
   if(sock == -1){
     error_handling("socker() error");
   }
