@@ -30,7 +30,7 @@ int main(){
   }
   memset(&serv_addr, 0, sizeof(serv_addr));
   serv_addr.sin_family = PF_LOCAL;
-  serv_addr.sin_addr.s_addr = local_addr(ip_addr);
+  serv_addr.sin_addr.s_addr = inet_addr(ip_addr);
   serv_addr.sin_port = htons(port_num);
 
   while(1){
