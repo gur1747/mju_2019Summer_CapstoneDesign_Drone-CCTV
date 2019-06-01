@@ -43,11 +43,11 @@ int main() {
 		distribute(motor_speed, throttle, balancing_force);//8
 		check(hm10, throttle, target_angle);//9
 		update(pca9685, motor, motor_speed);//10
-
+/*
 		static int cnt_loop;//1
 		cnt_loop++;//1
 		if(cnt_loop%100 != 0) continue;//1
-
+*/
 		// print(gyro_raw);//1
 		// print(gyro_offset);//2
 		// print(gyro_adj);//3
