@@ -43,21 +43,21 @@ int main() {
                 if  ( kbhit() ){
                   c = getchar();
                   if(c == 'w'){
-                    throttle.value += 1;
+                    throttle.value += 5;
                   }else if(c == 's'){
-                    throttle.value -= 1;
+                    throttle.value -= 5;
                   }else if(c == 'a'){
-                    target_angle.yaw += 1;
+                    target_angle.yaw += 3;
                   }else if(c == 'd'){
-                    target_angle.yaw -= 1;
+                    target_angle.yaw -= 3;
                   }else if(c == 'i'){
-                    target_angle.pitch -= 1;
+                    target_angle.pitch -= 3;
                   }else if(c == 'k'){
-                    target_angle.pitch += 1;
+                    target_angle.pitch += 3;
                   }else if(c == 'j'){
-                    target_angle.roll -= 1;
+                    target_angle.roll -= 3;
                   }else if(c == 'l'){
-                    target_angle.roll += 1;
+                    target_angle.roll += 3;
                   }else if ( c == ' ' ){
                     throttle.value = 0;
                     exit = true;
@@ -85,12 +85,12 @@ int main() {
                 //print(gyro_raw);//1
                 //print(gyro_offset);//2
                 //print(gyro_adj);//3
-                print(gyro_rate);//4
+                //print(gyro_rate);//4
                 //print(dt);//5
-                print(gyro_angle);//6
-                print(balancing_force);//7
-                print(motor_speed);//8
-                println();//1
+                //print(gyro_angle);//6
+                //print(balancing_force);//7
+                //print(motor_speed);//8
+                //println();//1
 
         }
 }

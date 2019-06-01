@@ -30,7 +30,6 @@ int main() {
 	init(hm10);//9
 	init(i2c, pca9685);//10
 
-  target_angle.pitch = -5.0;
 	while(true) {
 
 		read(mpu6050, gyro_raw);//1
