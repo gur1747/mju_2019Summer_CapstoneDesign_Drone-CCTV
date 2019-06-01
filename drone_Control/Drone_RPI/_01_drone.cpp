@@ -12,7 +12,7 @@ gyro_adj_t gyro_adj;//3
 gyro_rate_t gyro_rate;//4
 dt_t dt;//5
 gyro_angle_t gyro_angle;//6
-target_angle_t target_angle = {  .pitch = -5.0,};//7
+target_angle_t target_angle;//7
 balancing_force_t balancing_force;//7
 throttle_t throttle = { .value = 0, };//8
 motor_speed_t motor_speed;//8
@@ -30,6 +30,7 @@ int main() {
 	init(hm10);//9
 	init(i2c, pca9685);//10
 
+  target_angle.pitch = -5.0;
 	while(true) {
 
 		read(mpu6050, gyro_raw);//1
