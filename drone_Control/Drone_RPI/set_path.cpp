@@ -40,37 +40,52 @@ int main() {
         char c;
         bool exit = false;
 
-        int i, j;
+        int i, j, k;
         for(i = 0; i <= 170; i++){
-          throttle.value = i;
-          myfunc();
+                throttle.value = i;
+                myfunc();
 
-          if  ( kbhit() ){
-            c = getchar();
-            if( c == ' ' ){
-              throttle.value = 0;
-              exit = true;
-            }
-          }
-          delay(20);
+                if  ( kbhit() ){
+                        c = getchar();
+                        if( c == ' ' ){
+                                throttle.value = 0;
+                                exit = true;
+                        }
+                }
+                delay(20);
         }
 
         for(j = 0 ; j <= 20; j++){
-          throttle.value = i - j;
-          myfunc();
+                throttle.value = i - j;
+                myfunc();
 
-          if  ( kbhit() ){
-            c = getchar();
-            if( c == ' ' ){
-              throttle.value = 0;
-              exit = true;
-            }
-          }
-          delay(20);
+                if  ( kbhit() ){
+                        c = getchar();
+                        if( c == ' ' ){
+                                throttle.value = 0;
+                                exit = true;
+                        }
+                }
+                delay(20);
         }
 
+        for(k = 0; k <= 30; k -= 5){
+                throttle.value = i - 20 - j;
+                myfunc();
+
+                if  ( kbhit() ){
+                        c = getchar();
+                        if( c == ' ' ){
+                                throttle.value = 0;
+                                exit = true;
+                        }
+                }
+                delay(20);
+        }
+        throttle.value = 0;
+
         if ( exit ){
-          return 0;
+                return 0;
         }
 
 
@@ -88,41 +103,41 @@ int main() {
 
 int kbhit(void){    //키보드 입력감지 함수 -> 감지 된 문자를 저장해둠
 
-  struct termios oldt, newt;
-  int ch;
-  int oldf;
+        struct termios oldt, newt;
+        int ch;
+        int oldf;
 
-  tcgetattr(STDIN_FILENO, &oldt);
-  newt = oldt;
-  newt.c_lflag &= ~(ICANON | ECHO);
+        tcgetattr(STDIN_FILENO, &oldt);
+        newt = oldt;
+        newt.c_lflag &= ~(ICANON | ECHO);
 
-  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+        oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+        fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
 
-  ch = getchar();
-  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-  fcntl(STDIN_FILENO, F_SETFL, oldf);
+        ch = getchar();
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+        fcntl(STDIN_FILENO, F_SETFL, oldf);
 
-  if(EOF != ch) {
-    ungetc(ch, stdin);
-    return 1;
-  }
-  return 0;
+        if(EOF != ch) {
+                ungetc(ch, stdin);
+                return 1;
+        }
+        return 0;
 }
 
 void myfunc(){
 
-  read(mpu6050, gyro_raw);//1 //원시 자이로 값 읽기
-  calc(gyro_adj, gyro_raw, gyro_offset);//3 //원시 자이로 편차 평균 구하기
-  calc(gyro_rate, gyro_adj);//4 //회전 각속도 계산
-  calc(dt);//5  //시간 주기 측정
-  calc(gyro_angle, gyro_rate, dt);//6 //회전각 구하기
-  calc(balancing_force, target_angle, gyro_angle);//7 //드론균형 보정값 구하기
-  add(balancing_force, gyro_rate);//11  //보정값 추가 보정
-  add(balancing_force, target_angle, gyro_angle, dt);//12 //추가 보정
-  distribute(motor_speed, throttle, balancing_force);//8  //모터 속도 도출
-  //check(hm10, throttle, target_angle);//9         //명령 수신 확인
-  update(pca9685, motor, motor_speed);//10  //도출 된 모터 속도 적용
+        read(mpu6050, gyro_raw);//1 //원시 자이로 값 읽기
+        calc(gyro_adj, gyro_raw, gyro_offset);//3 //원시 자이로 편차 평균 구하기
+        calc(gyro_rate, gyro_adj);//4 //회전 각속도 계산
+        calc(dt);//5  //시간 주기 측정
+        calc(gyro_angle, gyro_rate, dt);//6 //회전각 구하기
+        calc(balancing_force, target_angle, gyro_angle);//7 //드론균형 보정값 구하기
+        add(balancing_force, gyro_rate);//11  //보정값 추가 보정
+        add(balancing_force, target_angle, gyro_angle, dt);//12 //추가 보정
+        distribute(motor_speed, throttle, balancing_force);//8  //모터 속도 도출
+        //check(hm10, throttle, target_angle);//9         //명령 수신 확인
+        update(pca9685, motor, motor_speed);//10  //도출 된 모터 속도 적용
 
 }
