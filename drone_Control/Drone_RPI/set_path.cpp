@@ -39,7 +39,6 @@ int main() {
         init(i2c, pca9685);//10  //모터 초기화
 
 
-        //throttle fixed, no change
         int i, j, k, l;
         for(i = 0; i <= 200; i++){
                 command();
