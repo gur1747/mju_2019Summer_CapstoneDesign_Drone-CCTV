@@ -16,7 +16,7 @@ gyro_adj_t gyro_adj;//3
 gyro_rate_t gyro_rate;//4
 dt_t dt;//5
 gyro_angle_t gyro_angle;//6
-target_angle_t target_angle = { .roll = 0.0, .pitch = 1.0, .yaw = 10.0,};//7
+target_angle_t target_angle = { .roll = 0.0, .pitch = 1.0, .yaw = 0.0,};//7
 balancing_force_t balancing_force;//7
 throttle_t throttle = { .value = 0, };//8
 motor_speed_t motor_speed;//8
@@ -41,45 +41,21 @@ int main() {
         bool exit = false;
 
         int i, j, k;
-        for(i = 0; i <= 170; i++){
+        for(i = 0; i <= 130; i++){
                 throttle.value = i;
                 myfunc();
-
-                if  ( kbhit() ){
-                        c = getchar();
-                        if( c == ' ' ){
-                                throttle.value = 0;
-                                exit = true;
-                        }
-                }
                 delay(20);
         }
 
-        for(j = 0 ; j <= 20; j++){
+        for(j = 0 ; j <= 30; j++){
                 throttle.value = i - j;
                 myfunc();
-
-                if  ( kbhit() ){
-                        c = getchar();
-                        if( c == ' ' ){
-                                throttle.value = 0;
-                                exit = true;
-                        }
-                }
                 delay(20);
         }
 
-        for(k = 0; k <= 30; k -= 5){
-                throttle.value = i - 20 - j;
+        for(k = 0; k <= 20; k += 5){
+                throttle.value = i - 30 - k;
                 myfunc();
-
-                if  ( kbhit() ){
-                        c = getchar();
-                        if( c == ' ' ){
-                                throttle.value = 0;
-                                exit = true;
-                        }
-                }
                 delay(20);
         }
         throttle.value = 0;
