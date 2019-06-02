@@ -12,7 +12,7 @@ gyro_adj_t gyro_adj;//3
 gyro_rate_t gyro_rate;//4
 dt_t dt;//5
 gyro_angle_t gyro_angle;//6
-target_angle_t target_angle = { .roll = 0.0, .pitch = 1.0, .yaw = 0.0,};//7
+target_angle_t target_angle;//7
 balancing_force_t balancing_force;//7
 throttle_t throttle = { .value = 0, };//8
 motor_speed_t motor_speed;//8
@@ -34,30 +34,30 @@ int main() {
 
 
         int i, j, k, l;
-        for(i = 0; i <= 170; i++){
+        for(i = 0; i <= 160; i++){
                 throttle.value = i;
                 myfunc();
-                delay(20);
+                delay(10);
         }
-//t -> 170
+//t -> 160
         for(j = 0 ; j < 30; j++){
                 throttle.value -= 1;
                 myfunc();
-                delay(20);
+                delay(10);
         }
-//t -> 140
+//t -> 130
         for(k = 0; k < 100; k++){
                 myfunc();
-                delay(20);
+                delay(10);
         }
-//t -> 140
-        for(l = 0; l < 28; l++){
+//t -> 130
+        for(l = 0; l < 26; l++){
                 throttle.value -= 5;
                 myfunc();
-                delay(20);
+                delay(10);
         }
         throttle.value = 0;
-//t -> 100
+//t -> 0
 }
 
 void myfunc(){    //업데이트 루틴
