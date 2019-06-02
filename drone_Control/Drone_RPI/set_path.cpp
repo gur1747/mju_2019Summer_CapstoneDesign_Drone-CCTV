@@ -1,8 +1,4 @@
 #include "_00_drone.h"
-#include <stdio.h>      //이하 헤더 4개는 kbhit 함수를 위함
-#include <termios.h>
-#include <unistd.h>
-#include <fcntl.h>
 
 i2c_t i2c;//1
 mpu6050_t mpu6050 = {
@@ -24,7 +20,6 @@ hm10_t hm10;//9
 motor_t motor = { .a = 0, .b = 2, .c = 1, .d = 3, };//10
 pca9685_t pca9685 = { .i2c_addr = 0x40, };//10
 
-int kbhit(void);
 void myfunc();
 
 int main() {
@@ -37,72 +32,35 @@ int main() {
         init(hm10);//9 //블루투스 모듈 쪽 초기화
         init(i2c, pca9685);//10  //모터 초기화
 
-        char c;
-        bool exit = false;
 
-        int i, j, k;
-        for(i = 0; i <= 130; i++){
+        int i, j, k, l;
+        for(i = 0; i <= 150; i++){
                 throttle.value = i;
                 myfunc();
                 delay(20);
         }
-
-        for(j = 0 ; j <= 30; j++){
-                throttle.value = i - j;
+//t -> 150
+        for(j = 0 ; j < 30; j++){
+                throttle.value -= 1;
                 myfunc();
                 delay(20);
         }
-
-        for(k = 0; k <= 20; k += 5){
-                throttle.value = i - 30 - k;
+//t -> 120
+        for(k = 0; k < 30; k++){
+                myfunc();
+                delay(20);
+        }
+//t -> 120
+        for(l = 0; l < 24; l++){
+                throttle.value -= -5;
                 myfunc();
                 delay(20);
         }
         throttle.value = 0;
-
-        if ( exit ){
-                return 0;
-        }
-
-
-        //print(gyro_raw);//1
-        //print(gyro_offset);//2
-        //print(gyro_adj);//3
-        //print(gyro_rate);//4
-        //print(dt);//5
-        //print(gyro_angle);//6
-        //print(balancing_force);//7
-        //print(motor_speed);//8
-        //println();//1
-
+//t -> 100
 }
 
-int kbhit(void){    //키보드 입력감지 함수 -> 감지 된 문자를 저장해둠
-
-        struct termios oldt, newt;
-        int ch;
-        int oldf;
-
-        tcgetattr(STDIN_FILENO, &oldt);
-        newt = oldt;
-        newt.c_lflag &= ~(ICANON | ECHO);
-
-        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-        oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-        fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
-
-        ch = getchar();
-        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-        fcntl(STDIN_FILENO, F_SETFL, oldf);
-
-        if(EOF != ch) {
-                ungetc(ch, stdin);
-                return 1;
-        }
-        return 0;
-}
-
-void myfunc(){
+void myfunc(){    //업데이트 루틴
 
         read(mpu6050, gyro_raw);//1 //원시 자이로 값 읽기
         calc(gyro_adj, gyro_raw, gyro_offset);//3 //원시 자이로 편차 평균 구하기
