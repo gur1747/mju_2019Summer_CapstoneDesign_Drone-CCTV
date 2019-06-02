@@ -46,7 +46,7 @@ int main() {
                 delay(10);
         }
 //t -> 130
-        for(k = 0; k < 100; k++){
+        for(k = 0; k < 300; k++){
                 myfunc();
                 delay(10);
         }
