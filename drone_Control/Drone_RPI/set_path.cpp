@@ -39,6 +39,7 @@ int main() {
         init(i2c, pca9685);//10  //모터 초기화
 
 
+        //throttle fixed, no change
         int i, j, k, l;
         for(i = 0; i <= 160; i++){
                 command();
@@ -46,20 +47,20 @@ int main() {
                 myfunc();
                 delay(10);
         }
-//t -> 160
+        //t -> 160
         for(j = 0 ; j < 30; j++){
                 command();
                 throttle.value -= 1;
                 myfunc();
                 delay(10);
         }
-//t -> 130
+        //t -> 130
         for(k = 0; k < 300; k++){
                 command();
                 myfunc();
                 delay(10);
         }
-//t -> 130
+        //t -> 130
         for(l = 0; l < 26; l++){
                 command();
                 throttle.value -= 5;
@@ -67,7 +68,7 @@ int main() {
                 delay(10);
         }
         throttle.value = 0;
-//t -> 0
+        //t -> 0
 }
 
 void myfunc(){    //업데이트 루틴
@@ -81,46 +82,46 @@ void myfunc(){    //업데이트 루틴
         add(balancing_force, gyro_rate);//11  //보정값 추가 보정
         add(balancing_force, target_angle, gyro_angle, dt);//12 //추가 보정
         distribute(motor_speed, throttle, balancing_force);//8  //모터 속도 도출
-        //check(hm10, throttle, target_angle);//9         //명령 수신 확인
         update(pca9685, motor, motor_speed);//10  //도출 된 모터 속도 적용
 }
 
 int kbhit(void){    //키보드 입력감지 함수 -> 감지 된 문자를 저장해둠
 
-  struct termios oldt, newt;
-  int ch;
-  int oldf;
+        struct termios oldt, newt;
+        int ch;
+        int oldf;
 
-  tcgetattr(STDIN_FILENO, &oldt);
-  newt = oldt;
-  newt.c_lflag &= ~(ICANON | ECHO);
+        tcgetattr(STDIN_FILENO, &oldt);
+        newt = oldt;
+        newt.c_lflag &= ~(ICANON | ECHO);
 
-  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+        oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+        fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
 
-  ch = getchar();
-  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-  fcntl(STDIN_FILENO, F_SETFL, oldf);
+        ch = getchar();
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+        fcntl(STDIN_FILENO, F_SETFL, oldf);
 
-  if(EOF != ch) {
-    ungetc(ch, stdin);
-    return 1;
-  }
-  return 0;
+        if(EOF != ch) {
+                ungetc(ch, stdin);
+                return 1;
+        }
+        return 0;
 }
 
 void command(){
-  if  ( kbhit() ){
-    c = getchar();
-    if(c == 'w'){
-      target_angle.pitch -= 2;
-    }else if(c == 's'){
-      target_angle.pitch += 2;
-    }else if(c == 'a'){
-      target_angle.roll -= 2;
-    }else if(c == 'd'){
-      target_angle.roll += 2;
-    }
-  }
+        char c;
+        if(kbhit()){
+                c = getchar();
+                if(c == 'w'){
+                        target_angle.pitch -= 2;
+                }else if(c == 's'){
+                        target_angle.pitch += 2;
+                }else if(c == 'a'){
+                        target_angle.roll -= 2;
+                }else if(c == 'd'){
+                        target_angle.roll += 2;
+                }
+        }
 }
