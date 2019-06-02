@@ -40,32 +40,33 @@ int main() {
 
 
         int i, j, k, l;
-        for(i = 0; i <= 200; i++){
+        for(i = 0; i <= 180; i++){
                 command();
                 throttle.value = i;
                 myfunc();
                 delay(10);
         }
-        //t -> 200
+        //t -> 180
         for(j = 0 ; j < 30; j++){
                 command();
                 throttle.value -= 1;
                 myfunc();
                 delay(10);
         }
-        //t -> 170
+        //t -> 150
         for(k = 0; k < 300; k++){
                 command();
                 myfunc();
                 delay(10);
         }
-        //t -> 170
-        for(l = 0; l < 34; l++){
+        //t -> 150
+        for(l = 0; l < 24; l++){
                 command();
                 throttle.value -= 5;
                 myfunc();
                 delay(10);
         }
+        //추가적인 쓰로틀 유지가 필요할 수도 있음 필요시 추가 : 부드러운착지 (쓰로틀 순차감소 -> 유지 -> 순차감소 순)
         throttle.value = 0;
         //t -> 0
 }
