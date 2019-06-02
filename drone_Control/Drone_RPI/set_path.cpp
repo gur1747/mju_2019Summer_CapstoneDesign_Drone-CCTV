@@ -40,27 +40,27 @@ int main() {
 
 
         int i, j, k, l;
-        for(i = 0; i <= 200; i++){
+        for(i = 0; i <= 250; i++){
                 command();
                 throttle.value = i;
                 myfunc();
                 delay(10);
         }
-        //t -> 200
+        //t -> 250
         for(j = 0 ; j < 30; j++){
                 command();
                 throttle.value -= 1;
                 myfunc();
                 delay(10);
         }
-        //t -> 170
+        //t -> 220
         for(k = 0; k < 300; k++){
                 command();
                 myfunc();
                 delay(10);
         }
-        //t -> 170
-        for(l = 0; l < 34; l++){
+        //t -> 220
+        for(l = 0; l < 44; l++){
                 command();
                 throttle.value -= 5;
                 myfunc();
