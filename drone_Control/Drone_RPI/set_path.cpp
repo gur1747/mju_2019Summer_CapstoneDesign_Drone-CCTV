@@ -34,25 +34,25 @@ int main() {
 
 
         int i, j, k, l;
-        for(i = 0; i <= 150; i++){
+        for(i = 0; i <= 170; i++){
                 throttle.value = i;
                 myfunc();
                 delay(20);
         }
-//t -> 150
+//t -> 170
         for(j = 0 ; j < 30; j++){
                 throttle.value -= 1;
                 myfunc();
                 delay(20);
         }
-//t -> 120
-        for(k = 0; k < 30; k++){
+//t -> 140
+        for(k = 0; k < 100; k++){
                 myfunc();
                 delay(20);
         }
-//t -> 120
-        for(l = 0; l < 24; l++){
-                throttle.value -= -5;
+//t -> 140
+        for(l = 0; l < 28; l++){
+                throttle.value -= 5;
                 myfunc();
                 delay(20);
         }
