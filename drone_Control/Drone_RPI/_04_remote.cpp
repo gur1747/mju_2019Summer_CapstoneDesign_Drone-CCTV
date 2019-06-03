@@ -51,7 +51,7 @@ void check(
 			cnt_loop++;//1
 			if(cnt_loop%100 != 0) continue;//1
 
-			printf("throttle : %lf , tgt P R Y : %lf, %lf, %lf \n", throttle.value, target_angle.pitch, target_angle.roll, target_angle.yaw );
+			//printf("throttle : %lf , tgt P R Y : %lf, %lf, %lf \n", throttle.value, target_angle.pitch, target_angle.roll, target_angle.yaw );
 		}
 	}
 }//9

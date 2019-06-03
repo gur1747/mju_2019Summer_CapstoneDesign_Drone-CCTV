@@ -39,28 +39,31 @@ int main() {
         init(i2c, pca9685);//10  //모터 초기화
 
 
+
         int i, j, k, l;
-        for(i = 0; i <= 170; i++){
+        for(i = 0; i <= 160; i++){
                 command();
                 throttle.value = i;
                 myfunc();
                 delay(10);
         }
-        //t -> 170
+        //t -> 160
+        target_angle.pitch = 2;
         for(j = 0 ; j < 30; j++){
                 command();
                 throttle.value -= 1;
                 myfunc();
                 delay(10);
         }
-        //t -> 140
-        for(k = 0; k < 300; k++){
+        target_angle.pitch = 0;
+        //t -> 130
+        for(k = 0; k < 150; k++){
                 command();
                 myfunc();
                 delay(10);
         }
-        //t -> 140
-        for(l = 0; l < 28; l++){
+        //t -> 130
+        for(l = 0; l < 26; l++){
                 command();
                 throttle.value -= 5;
                 myfunc();
