@@ -1,8 +1,12 @@
 #include "_00_drone.h"
-#include <stdio.h>      //이하 헤더 4개는 kbhit 함수를 위함
+#include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <string.h>
+#define PORT 8088
 
 i2c_t i2c;//1
 mpu6050_t mpu6050 = {
@@ -30,51 +34,176 @@ void command();
 
 int main() {
 
+        //1. 초기화 단계
         wiringPiSetup();//1
         init(i2c);//1  //i2c 포트 개방
         init(i2c, mpu6050);//1 //자이로센서 초기화
-        get(mpu6050, gyro_offset);//2  //자이로 값 평균 구하기 위해 합을 구하는 곳(1000번 측정값 더함)
+        get(mpu6050, gyro_offset);//2  //자이로 값 평균 구하기 위해 합을 구하는 곳
         init(dt);//5 //시간 주기 구하기
         init(hm10);//9 //블루투스 모듈 쪽 초기화
         init(i2c, pca9685);//10  //모터 초기화
 
 
+        //2. 라즈베리파이 3b+ 메인기판 명령 수신 대기
+        int sock = 0, valread;
+        struct sockaddr_in serv_addr;
+        char buffer[1024] = {0};
+        if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+        {
+                printf("\n Socket creation error \n");
+                return -1;
+        }
 
+        serv_addr.sin_family = AF_INET;
+        serv_addr.sin_port = htons(PORT);
+        if(inet_pton(AF_INET, "192.168.43.151", &serv_addr.sin_addr)<=0)
+        {
+                printf("\nInvalid address/ Address not supported \n");
+                return -1;
+        }
+
+        if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+        {
+                printf("\nConnection Failed \n");
+                return -1;
+        }
+        //메시지 수신 대기
+        valread = read( sock , buffer, 1024);
+        printf("%s\n",buffer );
+
+
+        //3. 경로 주행
         int i, j, k, l;
-        for(i = 0; i <= 160; i++){
-                command();
-                throttle.value = i;
-                myfunc();
-                delay(10);
-        }
-        //t -> 160
-        target_angle.pitch = 2;
-        for(j = 0 ; j < 30; j++){
-                command();
-                throttle.value -= 1;
-                myfunc();
-                delay(10);
-        }
-        target_angle.pitch = 0;
-        //t -> 130
-        for(k = 0; k < 150; k++){
-                command();
-                myfunc();
-                delay(10);
-        }
-        //t -> 130
-        for(l = 0; l < 26; l++){
-                command();
-                throttle.value -= 5;
-                myfunc();
-                delay(10);
-        }
-        //추가적인 쓰로틀 유지가 필요할 수도 있음 필요시 추가 : 부드러운착지 (쓰로틀 순차감소 -> 유지 -> 순차감소 순)
-        throttle.value = 0;
-        //t -> 0
+        if(atoi[buffer] == 1){
+
+          for(i = 0; i <= 160; i++){
+                  command();
+                  throttle.value = i;
+                  myfunc();
+                  delay(10);
+          }
+          //t -> 160
+          for(j = 0 ; j < 30; j++){
+                  command();
+                  throttle.value -= 1;
+                  myfunc();
+                  delay(10);
+          }
+          target_angle.pitch = 2;
+          //t -> 130
+          for(k = 0; k < 150; k++){
+                  command();
+                  myfunc();
+                  delay(10);
+          }
+          //t -> 130
+          target_angle.pitch = 0;
+          for(l = 0; l < 26; l++){
+                  command();
+                  throttle.value -= 5;
+                  myfunc();
+                  delay(10);
+          }
+          throttle.value = 0;
+        }else if(atoi[buffer] == 2){
+
+          for(i = 0; i <= 160; i++){
+                  command();
+                  throttle.value = i;
+                  myfunc();
+                  delay(10);
+          }
+          //t -> 160
+          for(j = 0 ; j < 30; j++){
+                  command();
+                  throttle.value -= 1;
+                  myfunc();
+                  delay(10);
+          }
+          target_angle.pitch = 5;
+          //t -> 130
+          for(k = 0; k < 300; k++){
+                  command();
+                  myfunc();
+                  delay(10);
+          }
+          target_angle.pitch = 0;
+          //t -> 130
+          for(l = 0; l < 26; l++){
+                  command();
+                  throttle.value -= 5;
+                  myfunc();
+                  delay(10);
+          }
+          throttle.value = 0;
+        }else if(atoi[buffer] == 3){
+
+          for(i = 0; i <= 160; i++){
+                  command();
+                  throttle.value = i;
+                  myfunc();
+                  delay(10);
+          }
+          //t -> 160
+          target_angle.pitch = 2;
+          for(j = 0 ; j < 30; j++){
+                  command();
+                  throttle.value -= 1;
+                  myfunc();
+                  delay(10);
+          }
+          target_angle.pitch = 0;
+          target_angle.roll = 5;
+          //t -> 130
+          for(k = 0; k < 150; k++){
+                  command();
+                  myfunc();
+                  delay(10);
+          }
+          target_angle.roll = 0;
+          //t -> 130
+          for(l = 0; l < 26; l++){
+                  command();
+                  throttle.value -= 5;
+                  myfunc();
+                  delay(10);
+          }
+          throttle.value = 0;
+        }else if(atoi[buffer] == 4){
+          for(i = 0; i <= 160; i++){
+                  command();
+                  throttle.value = i;
+                  myfunc();
+                  delay(10);
+          }
+          //t -> 160
+          target_angle.pitch = 2;
+          for(j = 0 ; j < 30; j++){
+                  command();
+                  throttle.value -= 1;
+                  myfunc();
+                  delay(10);
+          }
+          target_angle.pitch = 0;
+          //t -> 130
+          for(k = 0; k < 150; k++){
+                  command();
+                  myfunc();
+                  delay(10);
+          }
+          //t -> 130
+          for(l = 0; l < 26; l++){
+                  command();
+                  throttle.value -= 5;
+                  myfunc();
+                  delay(10);
+          }
+          throttle.value = 0;
+          }
+        return 0;
 }
 
-void myfunc(){    //업데이트 루틴
+void myfunc(){    //모터 속도 업데이트 루틴
 
         read(mpu6050, gyro_raw);//1 //원시 자이로 값 읽기
         calc(gyro_adj, gyro_raw, gyro_offset);//3 //원시 자이로 편차 평균 구하기
@@ -113,7 +242,7 @@ int kbhit(void){    //키보드 입력감지 함수 -> 감지 된 문자를 저�
         return 0;
 }
 
-void command(){
+void command(){   //경로 주행 간 보정 오차값을 키 입력을 통해 추가 보정
         char c;
         if(kbhit()){
                 c = getchar();
