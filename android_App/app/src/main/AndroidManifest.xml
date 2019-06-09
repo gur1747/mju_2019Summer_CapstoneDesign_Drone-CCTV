@@ -36,12 +36,6 @@
         <activity android:name=".SendMessageActivity"/>
         <activity android:name=".SettingActivity"/>
         <activity android:name=".SocketActivity"/>
-        <service android:name=".NotificationService"
-
-            android:enabled="true"/>
-
-        <receiver android:name=".NotificationReceiver"/>
-
 
 
     </application>
