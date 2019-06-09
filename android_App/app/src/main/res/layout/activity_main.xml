@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:ignore="MissingConstraints">
+ >
 
- <VideoView android:layout_width="match_parent"
-     android:layout_height="300dp"
+ <WebView
+     android:id="@+id/webview"
+     android:layout_width="415dp"
+     android:layout_height="443dp"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintTop_toTopOf="parent"
-     app:layout_constraintBottom_toTopOf="@id/button1"
-     app:layout_constraintLeft_toLeftOf="parent"
-     app:layout_constraintRight_toRightOf="parent"
-
-     android:id="@+id/videoView" />
+     app:layout_constraintVertical_bias="0.392" />
 
  <Button
      android:id="@+id/button1"
@@ -25,6 +25,8 @@
      android:backgroundTint="#FFCDD2"
      android:fontFamily="@font/namsan"
      android:text="112 신고"
+     android:stateListAnimator="@null"
+
      app:layout_constraintBottom_toBottomOf="@+id/button2"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintTop_toTopOf="@+id/button2"
@@ -63,19 +65,20 @@
 
  <Button
      android:id="@+id/button2"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginEnd="16dp"
+     android:layout_width="135dp"
+     android:layout_height="53dp"
+     android:layout_marginEnd="0dp"
      android:layout_marginBottom="110dp"
-
+     android:background="@android:color/transparent"
 
      android:backgroundTint="#FFCDD2"
      android:fontFamily="@font/namsan"
-     android:text="Drone"
-     android:visibility="invisible"
+     android:text=""
+
      app:layout_behavior="@string/appbar_scrolling_view_behavior"
      app:layout_constraintBottom_toBottomOf="parent"
-     app:layout_constraintEnd_toEndOf="parent" />
+     app:layout_constraintEnd_toEndOf="parent"
+     style="?android:attr/borderlessButtonStyle" />
 
 
 </android.support.constraint.ConstraintLayout>

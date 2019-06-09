@@ -16,7 +16,7 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        editText = findViewById(R.id.ip);
+        editText = findViewById(R.id.ipedit);
         bt_save = findViewById(R.id.bt_save);
 
         //저장되어 있는 값을 가져와서 editText에 표시한다.

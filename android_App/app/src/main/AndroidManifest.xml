@@ -35,9 +35,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".SendMessageActivity"/>
         <activity android:name=".SettingActivity"/>
-        <activity android:name=".GalleryActivity">
-        </activity>
-
+        <activity android:name=".SocketActivity"/>
         <service android:name=".NotificationService"
 
             android:enabled="true"/>

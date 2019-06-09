@@ -6,7 +6,13 @@
         android:id="@+id/gallery"
         android:checkable="false"
         android:fontFamily="@font/namsan"
-        android:title="사진 저장소"
+        android:title="gamil 확인"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/socket"
+        android:checkable="false"
+        android:fontFamily="@font/namsan"
+        android:title="드론 ip 설정"
         app:showAsAction="never" />
     <item
         android:id="@+id/setting"
